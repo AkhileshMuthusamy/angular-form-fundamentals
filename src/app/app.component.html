@@ -1,21 +1,152 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- #Template Driven Form -->
+<div class="container-fluid">
+  <h1>Bootcamp Enrollment Form</h1>
+  <form #userForm="ngForm">
+    {{ userForm.value | json }}
+    <hr />
+    {{ userModel | json }}
+    <hr />
+    <!-- Lists Classed associated with the element -->
+    <!-- {{ nameClasses.className }} -->
+    <hr />
+    {{ 'untouched: ' + name.untouched }} <br />
+    {{ 'touched: ' + name.touched }} <br />
+    {{ 'invalid: ' + name.invalid }} <br />
+    {{ 'valid: ' + name.valid }} <br />
+    {{ 'pristine: ' + name.pristine }} <br />
+    {{ 'dirty: ' + name.dirty }} <br />
+    <hr />
 
-<router-outlet></router-outlet>
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        #name="ngModel"
+        #nameClasses
+        name="name"
+        id="name"
+        class="form-control"
+        [class.is-invalid]="name.invalid && name.touched"
+        placeholder="Enter your full name"
+        [(ngModel)]="userModel.name"
+        required
+      />
+      <small class="text-danger" [class.d-none]="name.valid || name.untouched">
+        Name is required
+      </small>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" class="form-control" [(ngModel)]="userModel.email" />
+    </div>
+    <!-- Phone -->
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input
+        type="tel"
+        #phone="ngModel"
+        name="phone"
+        id="phone"
+        class="form-control"
+        [class.is-invalid]="phone.invalid && phone.touched"
+        pattern="^\d{10}$"
+        required
+        [(ngModel)]="userModel.phone"
+      />
+      <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">
+        Phone number is required and must be 10 digit
+      </small>
+    </div>
+    <!-- Dropdown -->
+    <div class="form-group">
+      <select class="custom-select" name="topic" [(ngModel)]="userModel.topic">
+        <option selected value="">I am interested in</option>
+        <option *ngFor="let topic of topics">{{ topic }}</option>
+      </select>
+    </div>
+    <!-- Radio button -->
+    <div class="mb-3">
+      <label for="">Time preference</label>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="timePreference"
+          id="timePreference_morning"
+          value="morning"
+          [(ngModel)]="userModel.timePreference"
+        />
+        <label class="form-check-label" for="timePreference_morning">
+          Morning (9AM - 12PM)
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="timePreference"
+          id="timePreference_evening"
+          value="evening"
+          [(ngModel)]="userModel.timePreference"
+        />
+        <label class="form-check-label" for="timePreference_evening">
+          Evening (5PM - 8PM)
+        </label>
+      </div>
+    </div>
+    <!-- Checkbox -->
+    <div class="form-check mb-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        name="subscribe"
+        id="subscribe"
+        [(ngModel)]="userModel.subscribe"
+      />
+      <label class="form-check-label" for="subscribe">
+        Send me promotional offers
+      </label>
+    </div>
+
+    <!-- ngModelGroup -->
+    <div ngModelGroup="address">
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input class="form-control" type="text" name="street" id="street" ngModel />
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <input class="form-control" type="text" name="city" id="city" ngModel />
+      </div>
+      <div class="form-group">
+        <label for="state">State</label>
+        <input class="form-control" type="text" name="state" id="state" ngModel />
+      </div>
+      <div class="form-group">
+        <label for="postalcode">Postal Code</label>
+        <input
+          class="form-control"
+          type="text"
+          #postalCode="ngModel"
+          name="postalcode"
+          id="postalcode"
+          ngModel
+          pattern="^\d{6}$"
+          required
+        />
+        <!-- {{ postalCode.valid }} -->
+        <!-- Validation: Angular Way -->
+        <div *ngIf="postalCode.errors && (postalCode.invalid || postalCode.touched)">
+          <small class="text-danger" *ngIf="postalCode?.errors.required">Postal Code is required</small>
+          <small class="text-danger" *ngIf="postalCode?.errors.pattern">Postal Code must be 6 digit</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button-->
+    <button class="btn btn-dark" type="submit">Submit form</button>
+  </form>
+</div>
