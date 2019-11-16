@@ -11,6 +11,7 @@ import { ReuableformsComponent } from './reuableforms/reuableforms.component';
 import { ProfileFormComponent } from './reuableforms/profile-form/profile-form.component';
 import { PasswordFormComponent } from './reuableforms/password-form/password-form.component';
 import { OnlyNumbersDirective } from './utils/only-numbers.directive';
+import { OnlyNumberOrDecimalDirective } from './utils/only-number-or-decimal.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OnlyNumbersDirective } from './utils/only-numbers.directive';
     ReuableformsComponent,
     ProfileFormComponent,
     PasswordFormComponent,
-    OnlyNumbersDirective
+    OnlyNumbersDirective,
+    OnlyNumberOrDecimalDirective
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
