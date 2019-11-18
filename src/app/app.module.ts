@@ -12,6 +12,7 @@ import { ProfileFormComponent } from './reuableforms/profile-form/profile-form.c
 import { PasswordFormComponent } from './reuableforms/password-form/password-form.component';
 import { OnlyNumbersDirective } from './utils/only-numbers.directive';
 import { OnlyNumberOrDecimalDirective } from './utils/only-number-or-decimal.directive';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { OnlyNumberOrDecimalDirective } from './utils/only-number-or-decimal.dir
     OnlyNumbersDirective,
     OnlyNumberOrDecimalDirective
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, TextMaskModule],
   providers: [],
   bootstrap: [AppComponent]
 })

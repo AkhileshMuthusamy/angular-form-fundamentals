@@ -2,6 +2,10 @@
   <form [formGroup]="signupForm" (ngSubmit)="submit()">
     <app-profile-form formControlName="profile"></app-profile-form>
     <app-password-form formControlName="password"></app-password-form>
+    <div class="form-group">
+      <label for="zipcode">Zip code</label>
+      <input [textMask]="{ mask: mask }" type="text" id="zipcode" class="form-control" formControlName="zipcode" />
+    </div>
     <button class="btn btn-primary">Sign Up</button>
   </form>
   <p>Form is {{ signupForm.valid ? 'Valid' : 'Invalid' }}</p>
